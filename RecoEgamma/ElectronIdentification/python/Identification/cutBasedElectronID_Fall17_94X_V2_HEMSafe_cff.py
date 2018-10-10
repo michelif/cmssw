@@ -4,7 +4,7 @@ import FWCore.ParameterSet.Config as cms
 
 # Common functions and classes for ID definition are imported here:
 from RecoEgamma.ElectronIdentification.Identification.cutBasedElectronID_tools \
-    import ( EleWorkingPoint_V5,
+    import ( EleWorkingPoint_V5_HEMSafe,
              IsolationCutInputs_V2,
              configureVIDCutBasedEleID_V5 )
 
@@ -22,7 +22,7 @@ from RecoEgamma.ElectronIdentification.Identification.cutBasedElectronID_tools \
 # Veto working point Barrel and Endcap
 #V2 of IDs good for Moriond 18
 idName = "cutBasedElectronID-Fall17-94X-V2-HEMSafe-veto"
-WP_Veto_EB = EleWorkingPoint_V5(
+WP_Veto_EB = EleWorkingPoint_V5_HEMSafe(
     idName                         = idName  , # idName
     full5x5_sigmaIEtaIEtaCut       = 0.0126  , # full5x5_sigmaIEtaIEtaCut
     dEtaInSeedCut                  = 0.00463 , # dEtaInSeedCut
@@ -37,7 +37,7 @@ WP_Veto_EB = EleWorkingPoint_V5(
     missingHitsCut                 = 2          # missingHitsCut
     )
 
-WP_Veto_EE = EleWorkingPoint_V5(
+WP_Veto_EE = EleWorkingPoint_V5_HEMSafe(
     idName                         = idName  , # idName
     full5x5_sigmaIEtaIEtaCut       = 0.0457  , # full5x5_sigmaIEtaIEtaCut
     dEtaInSeedCut                  = 0.00814 , # dEtaInSeedCut
@@ -54,7 +54,7 @@ WP_Veto_EE = EleWorkingPoint_V5(
 
 # Loose working point Barrel and Endcap
 idName = "cutBasedElectronID-Fall17-94X-V2-HEMSafe-loose"
-WP_Loose_EB = EleWorkingPoint_V5(
+WP_Loose_EB = EleWorkingPoint_V5_HEMSafe(
     idName                         = idName  , # idName
     full5x5_sigmaIEtaIEtaCut       = 0.0112  , # full5x5_sigmaIEtaIEtaCut
     dEtaInSeedCut                  = 0.00377 , # dEtaInSeedCut
@@ -69,7 +69,7 @@ WP_Loose_EB = EleWorkingPoint_V5(
     missingHitsCut                 = 1          # missingHitsCut
     )
 
-WP_Loose_EE = EleWorkingPoint_V5(
+WP_Loose_EE = EleWorkingPoint_V5_HEMSafe(
     idName                         = idName  , # idName
     full5x5_sigmaIEtaIEtaCut       = 0.0425  , # full5x5_sigmaIEtaIEtaCut
     dEtaInSeedCut                  = 0.00674 , # dEtaInSeedCut
@@ -86,7 +86,7 @@ WP_Loose_EE = EleWorkingPoint_V5(
 
 # Medium working point Barrel and Endcap
 idName = "cutBasedElectronID-Fall17-94X-V2-HEMSafe-medium"
-WP_Medium_EB = EleWorkingPoint_V5(
+WP_Medium_EB = EleWorkingPoint_V5_HEMSafe(
     idName                         = idName  , # idName
     full5x5_sigmaIEtaIEtaCut       = 0.0106  , # full5x5_sigmaIEtaIEtaCut
     dEtaInSeedCut                  = 0.0032  , # dEtaInSeedCut
@@ -107,7 +107,7 @@ WP_Medium_EB = EleWorkingPoint_V5(
     trkIsoConstTerm=5.00     
     )
 
-WP_Medium_EE = EleWorkingPoint_V5(
+WP_Medium_EE = EleWorkingPoint_V5_HEMSafe(
     idName                         = idName  , # idName
     full5x5_sigmaIEtaIEtaCut       = 0.0387  , # full5x5_sigmaIEtaIEtaCut
     dEtaInSeedCut                  = 0.00632 , # dEtaInSeedCut
@@ -133,7 +133,7 @@ WP_Medium_EE = EleWorkingPoint_V5(
 
 # Tight working point Barrel and Endcap
 idName = "cutBasedElectronID-Fall17-94X-V2-HEMSafe-tight"
-WP_Tight_EB = EleWorkingPoint_V5(
+WP_Tight_EB = EleWorkingPoint_V5_HEMSafe(
     idName                         = idName  , # idName
     full5x5_sigmaIEtaIEtaCut       = 0.0104  , # full5x5_sigmaIEtaIEtaCut
     dEtaInSeedCut                  = 0.00255 , # dEtaInSeedCut
@@ -148,7 +148,7 @@ WP_Tight_EB = EleWorkingPoint_V5(
     missingHitsCut                 = 1          # missingHitsCut
     )
 
-WP_Tight_EE = EleWorkingPoint_V5(
+WP_Tight_EE = EleWorkingPoint_V5_HEMSafe(
     idName                         = idName  , # idName
     full5x5_sigmaIEtaIEtaCut       = 0.0353  , # full5x5_sigmaIEtaIEtaCut
     dEtaInSeedCut                  = 0.00501 , # dEtaInSeedCut

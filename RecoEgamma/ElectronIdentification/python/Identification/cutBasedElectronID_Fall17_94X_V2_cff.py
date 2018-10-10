@@ -22,7 +22,7 @@ from RecoEgamma.ElectronIdentification.Identification.cutBasedElectronID_tools \
 # Veto working point Barrel and Endcap
 #V2 of IDs good for Moriond 18
 idName = "cutBasedElectronID-Fall17-94X-V2-veto"
-WP_Veto_EB = EleWorkingPoint_V5(
+WP_Veto_EB = EleWorkingPoint_V5_HEMSafe(
     idName                         = idName  , # idName
     full5x5_sigmaIEtaIEtaCut       = 0.0126  , # full5x5_sigmaIEtaIEtaCut
     dEtaInSeedCut                  = 0.00463 , # dEtaInSeedCut
@@ -37,7 +37,7 @@ WP_Veto_EB = EleWorkingPoint_V5(
     missingHitsCut                 = 2          # missingHitsCut
     )
 
-WP_Veto_EE = EleWorkingPoint_V5(
+WP_Veto_EE = EleWorkingPoint_V5_HEMSafe(
     idName                         = idName  , # idName
     full5x5_sigmaIEtaIEtaCut       = 0.0457  , # full5x5_sigmaIEtaIEtaCut
     dEtaInSeedCut                  = 0.00814 , # dEtaInSeedCut
@@ -54,7 +54,7 @@ WP_Veto_EE = EleWorkingPoint_V5(
 
 # Loose working point Barrel and Endcap
 idName = "cutBasedElectronID-Fall17-94X-V2-loose"
-WP_Loose_EB = EleWorkingPoint_V5(
+WP_Loose_EB = EleWorkingPoint_V5_HEMSafe(
     idName                         = idName  , # idName
     full5x5_sigmaIEtaIEtaCut       = 0.0112  , # full5x5_sigmaIEtaIEtaCut
     dEtaInSeedCut                  = 0.00377 , # dEtaInSeedCut
@@ -69,7 +69,7 @@ WP_Loose_EB = EleWorkingPoint_V5(
     missingHitsCut                 = 1          # missingHitsCut
     )
 
-WP_Loose_EE = EleWorkingPoint_V5(
+WP_Loose_EE = EleWorkingPoint_V5_HEMSafe(
     idName                         = idName  , # idName
     full5x5_sigmaIEtaIEtaCut       = 0.0425  , # full5x5_sigmaIEtaIEtaCut
     dEtaInSeedCut                  = 0.00674 , # dEtaInSeedCut
@@ -86,7 +86,7 @@ WP_Loose_EE = EleWorkingPoint_V5(
 
 # Medium working point Barrel and Endcap
 idName = "cutBasedElectronID-Fall17-94X-V2-medium"
-WP_Medium_EB = EleWorkingPoint_V5(
+WP_Medium_EB = EleWorkingPoint_V5_HEMSafe(
     idName                         = idName  , # idName
     full5x5_sigmaIEtaIEtaCut       = 0.0106  , # full5x5_sigmaIEtaIEtaCut
     dEtaInSeedCut                  = 0.0032  , # dEtaInSeedCut
@@ -101,7 +101,7 @@ WP_Medium_EB = EleWorkingPoint_V5(
     missingHitsCut                 = 1          # missingHitsCut
     )
 
-WP_Medium_EE = EleWorkingPoint_V5(
+WP_Medium_EE = EleWorkingPoint_V5_HEMSafe(
     idName                         = idName  , # idName
     full5x5_sigmaIEtaIEtaCut       = 0.0387  , # full5x5_sigmaIEtaIEtaCut
     dEtaInSeedCut                  = 0.00632 , # dEtaInSeedCut
@@ -118,7 +118,7 @@ WP_Medium_EE = EleWorkingPoint_V5(
 
 # Tight working point Barrel and Endcap
 idName = "cutBasedElectronID-Fall17-94X-V2-tight"
-WP_Tight_EB = EleWorkingPoint_V5(
+WP_Tight_EB = EleWorkingPoint_V5_HEMSafe(
     idName                         = idName  , # idName
     full5x5_sigmaIEtaIEtaCut       = 0.0104  , # full5x5_sigmaIEtaIEtaCut
     dEtaInSeedCut                  = 0.00255 , # dEtaInSeedCut
@@ -133,7 +133,7 @@ WP_Tight_EB = EleWorkingPoint_V5(
     missingHitsCut                 = 1          # missingHitsCut
     )
 
-WP_Tight_EE = EleWorkingPoint_V5(
+WP_Tight_EE = EleWorkingPoint_V5_HEMSafe(
     idName                         = idName  , # idName
     full5x5_sigmaIEtaIEtaCut       = 0.0353  , # full5x5_sigmaIEtaIEtaCut
     dEtaInSeedCut                  = 0.00501 , # dEtaInSeedCut
@@ -159,10 +159,10 @@ isoInputs = IsolationCutInputs_V2(
 # Set up VID configuration for all cuts and working points
 #
 
-cutBasedElectronID_Fall17_94X_V2_veto   = configureVIDCutBasedEleID_V5(WP_Veto_EB,   WP_Veto_EE, isoInputs)
-cutBasedElectronID_Fall17_94X_V2_loose  = configureVIDCutBasedEleID_V5(WP_Loose_EB,  WP_Loose_EE, isoInputs)
-cutBasedElectronID_Fall17_94X_V2_medium = configureVIDCutBasedEleID_V5(WP_Medium_EB, WP_Medium_EE, isoInputs)
-cutBasedElectronID_Fall17_94X_V2_tight  = configureVIDCutBasedEleID_V5(WP_Tight_EB,  WP_Tight_EE, isoInputs)
+cutBasedElectronID_Fall17_94X_V2_HEMSafe_veto   = configureVIDCutBasedEleID_V5_HEMSafe(WP_Veto_EB,   WP_Veto_EE, isoInputs)
+cutBasedElectronID_Fall17_94X_V2_HEMSafe_loose  = configureVIDCutBasedEleID_V5_HEMSafe(WP_Loose_EB,  WP_Loose_EE, isoInputs)
+cutBasedElectronID_Fall17_94X_V2_HEMSafe_medium = configureVIDCutBasedEleID_V5_HEMSafe(WP_Medium_EB, WP_Medium_EE, isoInputs)
+cutBasedElectronID_Fall17_94X_V2_HEMSafe_tight  = configureVIDCutBasedEleID_V5_HEMSafe(WP_Tight_EB,  WP_Tight_EE, isoInputs)
 
 # The MD5 sum numbers below reflect the exact set of cut variables
 # and values above. If anything changes, one has to 
@@ -171,13 +171,13 @@ cutBasedElectronID_Fall17_94X_V2_tight  = configureVIDCutBasedEleID_V5(WP_Tight_
 # 3) update the MD5 sum strings below and uncomment the lines again.
 #
 
-central_id_registry.register(cutBasedElectronID_Fall17_94X_V2_veto.idName,   '74e217e3ece16b49bd337026a29fc3e9')
-central_id_registry.register(cutBasedElectronID_Fall17_94X_V2_loose.idName,  '5547e2c8b5c222192519c41bff05bc2e')
-central_id_registry.register(cutBasedElectronID_Fall17_94X_V2_medium.idName, '48702f025a8df2c527f53927af8b66d0')
-central_id_registry.register(cutBasedElectronID_Fall17_94X_V2_tight.idName,  'c06761e199f084f5b0f7868ac48a3e19')
+central_id_registry.register(cutBasedElectronID_Fall17_94X_V2_HEMSafe_veto.idName,   '74e217e3ece16b49bd337026a29fc3e9')
+central_id_registry.register(cutBasedElectronID_Fall17_94X_V2_HEMSafe_loose.idName,  '5547e2c8b5c222192519c41bff05bc2e')
+central_id_registry.register(cutBasedElectronID_Fall17_94X_V2_HEMSafe_medium.idName, '48702f025a8df2c527f53927af8b66d0')
+central_id_registry.register(cutBasedElectronID_Fall17_94X_V2_HEMSafe_tight.idName,  'c06761e199f084f5b0f7868ac48a3e19')
 
 ### for now until we have a database...
-cutBasedElectronID_Fall17_94X_V2_veto.isPOGApproved   = cms.untracked.bool(True)
-cutBasedElectronID_Fall17_94X_V2_loose.isPOGApproved  = cms.untracked.bool(True)
-cutBasedElectronID_Fall17_94X_V2_medium.isPOGApproved = cms.untracked.bool(True)
-cutBasedElectronID_Fall17_94X_V2_tight.isPOGApproved  = cms.untracked.bool(True)
+cutBasedElectronID_Fall17_94X_V2_HEMSafe_veto.isPOGApproved   = cms.untracked.bool(True)
+cutBasedElectronID_Fall17_94X_V2_HEMSafe_loose.isPOGApproved  = cms.untracked.bool(True)
+cutBasedElectronID_Fall17_94X_V2_HEMSafe_medium.isPOGApproved = cms.untracked.bool(True)
+cutBasedElectronID_Fall17_94X_V2_HEMSafe_tight.isPOGApproved  = cms.untracked.bool(True)
