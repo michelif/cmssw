@@ -15,11 +15,12 @@ mvaVariablesFile = "RecoEgamma/ElectronIdentification/data/ElectronIDVariables.t
 
 outputFile = "electron_ntuple.root"
 
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(100) )
 
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring(
-         '/store/mc/RunIIFall17MiniAOD/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/MINIAODSIM/RECOSIMstep_94X_mc2017_realistic_v10-v1/00000/0293A280-B5F3-E711-8303-3417EBE33927.root'
+#         '/store/mc/RunIIFall17MiniAOD/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/MINIAODSIM/RECOSIMstep_94X_mc2017_realistic_v10-v1/00000/0293A280-B5F3-E711-8303-3417EBE33927.root'
+        '/store/relval/CMSSW_10_1_7/JetHT/MINIAOD/101X_dataRun2_Prompt_v11_RelVal_jetHT2018B-v1/10000/186E3EB8-1D80-E811-81CB-0CC47A4C8F0A.root'
     )
 )
 
@@ -37,6 +38,8 @@ switchOnVIDElectronIdProducer(process, dataFormat)
 
 # define which IDs we want to produce
 my_id_modules = [
+        'RecoEgamma.ElectronIdentification.Identification.cutBasedElectronID_Fall17_94X_V2_HEMSafe_cff',
+        'RecoEgamma.ElectronIdentification.Identification.cutBasedElectronID_Fall17_94X_V2_cff',
         'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Fall17_noIso_V2_cff',
         'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Fall17_iso_V2_cff',
         'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Fall17_noIso_V1_cff',
@@ -60,6 +63,8 @@ process.ntuplizer = cms.EDAnalyzer('ElectronMVANtuplizer',
         genParticlesMiniAOD  = cms.InputTag('prunedGenParticles'),
         #
         eleMVAs             = cms.untracked.vstring(
+                                          "egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V2-HEMSafe-medium",
+                                          "egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V2-medium",
                                           "egmGsfElectronIDs:mvaEleID-Fall17-noIso-V2-wp80",
                                           "egmGsfElectronIDs:mvaEleID-Fall17-noIso-V2-wpLoose",
                                           "egmGsfElectronIDs:mvaEleID-Fall17-noIso-V2-wp90",
@@ -75,7 +80,9 @@ process.ntuplizer = cms.EDAnalyzer('ElectronMVANtuplizer',
                                           "egmGsfElectronIDs:mvaEleID-Fall17-iso-V1-wpLoose",
                                           ),
         eleMVALabels        = cms.untracked.vstring(
-                                          "Fall17noIsoV2wp80",
+                                        "Fall17MediumCutBasedV2_medium_HEMSafe",
+                                        "Fall17MediumCutBasedV2_medium",
+                                        "Fall17noIsoV2wp80",
                                           "Fall17noIsoV2wpLoose",
                                           "Fall17noIsoV2wp90",
                                           "Fall17isoV2wpHZZ",

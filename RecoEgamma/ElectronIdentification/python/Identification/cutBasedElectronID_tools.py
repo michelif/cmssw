@@ -201,7 +201,10 @@ class EleWorkingPoint_V5_HEMSafe:
                  relCombIsolationWithEACut_C0,
                  relCombIsolationWithEACut_Cpt,
                  # conversion veto cut needs no parameters, so not mentioned
-                 missingHitsCut
+                 missingHitsCut,
+                 trkIsoSlopeTerm,
+                 trkIsoSlopeStart,
+                 trkIsoConstTerm
                  ):
         self.idName                          = idName
         self.dEtaInSeedCut                   = dEtaInSeedCut
@@ -419,6 +422,24 @@ def psetTrkPtIsoCut(wpEB, wpEE):
         needsAdditionalProducts = cms.bool(False),
         isIgnored = cms.bool(False)
         )
+
+# Configure tracker isolation cut
+def psetTrkPtIsoCutHEMSafe(wpEB, wpEE):
+    return cms.PSet( 
+        cutName = cms.string('GsfEleTrkPtIsoCutHEMSafe'),
+        # Three constants for the GsfEleTrkPtIsoCut
+        #     cut = constTerm if Et < slopeStart
+        #     cut = slopeTerm * (Et - slopeStart) + constTerm if Et >= slopeStart
+        slopeTermEB = cms.double( wpEB.trkIsoSlopeTerm ),
+        slopeTermEE = cms.double( wpEE.trkIsoSlopeTerm ),
+        slopeStartEB = cms.double( wpEB.trkIsoSlopeStart ),
+        slopeStartEE = cms.double( wpEE.trkIsoSlopeStart ),
+        constTermEB = cms.double( wpEB.trkIsoConstTerm ),
+        constTermEE = cms.double( wpEE.trkIsoConstTerm ),
+        needsAdditionalProducts = cms.bool(False),
+        isIgnored = cms.bool(False)
+        )
+
 
 # Configure GsfTrack chi2/NDOF cut
 def psetNormalizedGsfChi2Cut(wpEB, wpEE):
@@ -820,7 +841,7 @@ def configureVIDCutBasedEleID_V5_HEMSafe( wpEB, wpEE, isoInputs ):
             psetRelPFIsoScaledCut(wpEB, wpEE, isoInputs),       # rel. comb. PF isolation cut
             psetConversionVetoCut(),
             psetMissingHitsCut(wpEB, wpEE),
-            psetTrkPtIsoCut(wpEB, wpEE)                        # tracker isolation cut
+            psetTrkPtIsoCutHEMSafe(wpEB, wpEE)                        # tracker isolation cut
             )
         )
     #

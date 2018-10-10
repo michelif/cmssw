@@ -6,7 +6,7 @@ import FWCore.ParameterSet.Config as cms
 from RecoEgamma.ElectronIdentification.Identification.cutBasedElectronID_tools \
     import ( EleWorkingPoint_V5_HEMSafe,
              IsolationCutInputs_V2,
-             configureVIDCutBasedEleID_V5 )
+             configureVIDCutBasedEleID_V5_HEMSafe )
 
 #
 # The ID cuts below are optimized IDs on Fall17 simulation with 94X-based production
@@ -34,7 +34,11 @@ WP_Veto_EB = EleWorkingPoint_V5_HEMSafe(
     relCombIsolationWithEACut_Cpt  = 0.506   ,
     absEInverseMinusPInverseCut    = 0.209   , # absEInverseMinusPInverseCut
     # conversion veto cut needs no parameters, so not mentioned
-    missingHitsCut                 = 2          # missingHitsCut
+    missingHitsCut                 = 2,          # missingHitsCut
+    trkIsoSlopeTerm=0.00,     
+    trkIsoSlopeStart=10000.00,   
+    trkIsoConstTerm=5.00     
+
     )
 
 WP_Veto_EE = EleWorkingPoint_V5_HEMSafe(
@@ -49,7 +53,11 @@ WP_Veto_EE = EleWorkingPoint_V5_HEMSafe(
     relCombIsolationWithEACut_Cpt  = 0.963   ,
     absEInverseMinusPInverseCut    = 0.132   , # absEInverseMinusPInverseCut
     # conversion veto cut needs no parameters, so not mentioned
-    missingHitsCut                 = 3          # missingHitsCut
+    missingHitsCut                 = 3,          # missingHitsCut
+    trkIsoSlopeTerm=0.00,     
+    trkIsoSlopeStart=10000.00,   
+    trkIsoConstTerm=5.00     
+
     )
 
 # Loose working point Barrel and Endcap
@@ -66,7 +74,10 @@ WP_Loose_EB = EleWorkingPoint_V5_HEMSafe(
     relCombIsolationWithEACut_Cpt  = 0.506   ,
     absEInverseMinusPInverseCut    = 0.193   , # absEInverseMinusPInverseCut
     # conversion veto cut needs no parameters, so not mentioned
-    missingHitsCut                 = 1          # missingHitsCut
+    missingHitsCut                 = 1,          # missingHitsCut
+    trkIsoSlopeTerm=0.00,     
+    trkIsoSlopeStart=10000.00,   
+    trkIsoConstTerm=5.00     
     )
 
 WP_Loose_EE = EleWorkingPoint_V5_HEMSafe(
@@ -81,7 +92,11 @@ WP_Loose_EE = EleWorkingPoint_V5_HEMSafe(
     relCombIsolationWithEACut_Cpt  = 0.963   ,
     absEInverseMinusPInverseCut    = 0.111   , # absEInverseMinusPInverseCut
     # conversion veto cut needs no parameters, so not mentioned
-    missingHitsCut                 = 1         # missingHitsCut
+    missingHitsCut                 = 1,         # missingHitsCut
+    trkIsoSlopeTerm=0.00,     
+    trkIsoSlopeStart=10000.00,   
+    trkIsoConstTerm=5.00     
+
     )
 
 # Medium working point Barrel and Endcap
@@ -145,7 +160,11 @@ WP_Tight_EB = EleWorkingPoint_V5_HEMSafe(
     relCombIsolationWithEACut_Cpt  = 0.506   ,
     absEInverseMinusPInverseCut    = 0.159   , # absEInverseMinusPInverseCut
     # conversion veto cut needs no parameters, so not mentioned
-    missingHitsCut                 = 1          # missingHitsCut
+    missingHitsCut                 = 1,          # missingHitsCut
+    trkIsoSlopeTerm=0.00,     
+    trkIsoSlopeStart=10000.00,   
+    trkIsoConstTerm=5.00     
+
     )
 
 WP_Tight_EE = EleWorkingPoint_V5_HEMSafe(
@@ -160,7 +179,11 @@ WP_Tight_EE = EleWorkingPoint_V5_HEMSafe(
     relCombIsolationWithEACut_Cpt  = 0.963   ,
     absEInverseMinusPInverseCut    = 0.0197  , # absEInverseMinusPInverseCut
     # conversion veto cut needs no parameters, so not mentioned
-    missingHitsCut                 = 1          # missingHitsCut
+    missingHitsCut                 = 1,         # missingHitsCut
+    trkIsoSlopeTerm=0.00,     
+    trkIsoSlopeStart=10000.00,   
+    trkIsoConstTerm=5.00     
+
     )
 
 # Second, define what effective areas to use for pile-up correction
@@ -174,10 +197,10 @@ isoInputs = IsolationCutInputs_V2(
 # Set up VID configuration for all cuts and working points
 #
 
-cutBasedElectronID_Fall17_94X_V2_HEMSafe_veto   = configureVIDCutBasedEleID_V5(WP_Veto_EB,   WP_Veto_EE, isoInputs)
-cutBasedElectronID_Fall17_94X_V2_HEMSafe_loose  = configureVIDCutBasedEleID_V5(WP_Loose_EB,  WP_Loose_EE, isoInputs)
-cutBasedElectronID_Fall17_94X_V2_HEMSafe_medium = configureVIDCutBasedEleID_V5(WP_Medium_EB, WP_Medium_EE, isoInputs)
-cutBasedElectronID_Fall17_94X_V2_HEMSafe_tight  = configureVIDCutBasedEleID_V5(WP_Tight_EB,  WP_Tight_EE, isoInputs)
+cutBasedElectronID_Fall17_94X_V2_HEMSafe_veto   = configureVIDCutBasedEleID_V5_HEMSafe(WP_Veto_EB,   WP_Veto_EE, isoInputs)
+cutBasedElectronID_Fall17_94X_V2_HEMSafe_loose  = configureVIDCutBasedEleID_V5_HEMSafe(WP_Loose_EB,  WP_Loose_EE, isoInputs)
+cutBasedElectronID_Fall17_94X_V2_HEMSafe_medium = configureVIDCutBasedEleID_V5_HEMSafe(WP_Medium_EB, WP_Medium_EE, isoInputs)
+cutBasedElectronID_Fall17_94X_V2_HEMSafe_tight  = configureVIDCutBasedEleID_V5_HEMSafe(WP_Tight_EB,  WP_Tight_EE, isoInputs)
 
 # The MD5 sum numbers below reflect the exact set of cut variables
 # and values above. If anything changes, one has to 
@@ -186,10 +209,10 @@ cutBasedElectronID_Fall17_94X_V2_HEMSafe_tight  = configureVIDCutBasedEleID_V5(W
 # 3) update the MD5 sum strings below and uncomment the lines again.
 #
 
-central_id_registry.register(cutBasedElectronID_Fall17_94X_V2_HEMSafe_veto.idName,   '74e217e3ece16b49bd337026a29fc3e9')
-central_id_registry.register(cutBasedElectronID_Fall17_94X_V2_HEMSafe_loose.idName,  '5547e2c8b5c222192519c41bff05bc2e')
-central_id_registry.register(cutBasedElectronID_Fall17_94X_V2_HEMSafe_medium.idName, '48702f025a8df2c527f53927af8b66d0')
-central_id_registry.register(cutBasedElectronID_Fall17_94X_V2_HEMSafe_tight.idName,  'c06761e199f084f5b0f7868ac48a3e19')
+central_id_registry.register(cutBasedElectronID_Fall17_94X_V2_HEMSafe_veto.idName,   'ef989892b1b4eb42b5c12f8b17e5187b')
+central_id_registry.register(cutBasedElectronID_Fall17_94X_V2_HEMSafe_loose.idName,  '64ae6661f454feb17593147525c7b3f1')
+central_id_registry.register(cutBasedElectronID_Fall17_94X_V2_HEMSafe_medium.idName, '0d76bfed4e706570b003ce5180392ed1')
+central_id_registry.register(cutBasedElectronID_Fall17_94X_V2_HEMSafe_tight.idName,  'f15bb7ee9ac3d8b8084dd7c1f123e451')
 
 ### for now until we have a database...
 cutBasedElectronID_Fall17_94X_V2_HEMSafe_veto.isPOGApproved   = cms.untracked.bool(True)
