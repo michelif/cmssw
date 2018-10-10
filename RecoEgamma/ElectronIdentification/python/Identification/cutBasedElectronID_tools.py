@@ -819,8 +819,8 @@ def configureVIDCutBasedEleID_V5_HEMSafe( wpEB, wpEE, isoInputs ):
             psetEInerseMinusPInverseCut(wpEB, wpEE),            # |1/e-1/p| cut
             psetRelPFIsoScaledCut(wpEB, wpEE, isoInputs),       # rel. comb. PF isolation cut
             psetConversionVetoCut(),
-            psetMissingHitsCut(wpEB, wpEE)
-            psetTrkPtIsoCut(wpEB, wpEE),                        # tracker isolation cut
+            psetMissingHitsCut(wpEB, wpEE),
+            psetTrkPtIsoCut(wpEB, wpEE)                        # tracker isolation cut
             )
         )
     #
