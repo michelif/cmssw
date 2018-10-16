@@ -66,23 +66,35 @@ def main():
                 histos["phi_"+wp].Fill(getattr(entry,"scl_phi"))
             if (getattr(entry,"Fall17CutBasedV2_"+wp+"_HEMSafe")):
                 histos["phi_"+wp+"_HEMSafe"].Fill(getattr(entry,"scl_phi"))
+    
+
+ 
 
     for x in histos.keys():
         if "HEM" not in x:
+            print "plotting"
             hem = x+"_HEMSafe" 
             c1 = ROOT.TCanvas()
             histos[x].GetXaxis().SetTitle("#Phi")
             histos[hem].SetMarkerColor(ROOT.kRed)
             histos[hem].SetFillColor(ROOT.kRed)
             histos[hem].SetLineColor(ROOT.kRed)
+            leg = ROOT.TLegend(0.67,0.75,0.80,0.88,"","NBNDC")
+            leg.SetTextSize(0.025)
+            leg.AddEntry(histos[x],"STD ID","f")
+            leg.AddEntry(histos[hem],"HEM-SAFE ID","f")
+            
             histos[x].Draw()
             histos[hem].Draw("sameep")
+            leg.Draw("same")
             for format in ".png",".pdf",".C":
                 c1.SaveAs(outPath+str(x)+format)
             c1.Delete()
             c1 = ROOT.TCanvas()
-            histos[x].Divide(histos[hem])
-            histos[x].Draw("histep")
+            dummy = histos[x].Clone()
+            histos[x].Add(histos[hem],-1)
+            histos[x].Divide(dummy)
+            histos[x].Draw("hist")
             for format in ".png",".pdf",".C":
                 c1.SaveAs(outPath+"ratio_"+str(x)+format)
         
