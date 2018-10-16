@@ -43,6 +43,7 @@
 #include <TFile.h>
 #include <Math/VectorUtil.h>
 
+
 //
 // class declaration
 //
@@ -59,7 +60,7 @@ class ElectronMVANtuplizer : public edm::one::EDAnalyzer<edm::one::SharedResourc
       ~ElectronMVANtuplizer() override;
 
       static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
-
+  bool saveGenInfoEle_;
 
    private:
       void analyze(const edm::Event&, const edm::EventSetup&) override;
@@ -111,6 +112,7 @@ class ElectronMVANtuplizer : public edm::one::EDAnalyzer<edm::one::SharedResourc
       const bool isMC_;
       const double deltaR_;
       const double ptThreshold_;
+
 
       // ID decisions objects
       const std::vector< std::string > eleMapTags_;
@@ -173,6 +175,8 @@ ElectronMVANtuplizer::ElectronMVANtuplizer(const edm::ParameterSet& iConfig)
   , pileup_          (src_, consumesCollector(), iConfig, "pileup"      , "pileupMiniAOD")
   , genParticles_    (src_, consumesCollector(), iConfig, "genParticles", "genParticlesMiniAOD")
 {
+  saveGenInfoEle_          = iConfig.getParameter<bool>("saveGenInfoEle"); 
+
     // eleMaps
     for (size_t k = 0; k < nEleMaps_; ++k) {
 
@@ -286,7 +290,7 @@ ElectronMVANtuplizer::analyze(const edm::Event& iEvent, const edm::EventSetup& i
     vtxN_ = vertices->size();
 
     // Fill with true number of pileup
-    if(isMC_) {
+    if(isMC_ && saveGenInfoEle_) {
        for(const auto& pu : *pileup)
        {
            int bx = pu.getBunchCrossing();
@@ -331,7 +335,7 @@ ElectronMVANtuplizer::analyze(const edm::Event& iEvent, const edm::EventSetup& i
             vars_[iVar] = mvaVarMngr_.getValue(iVar, ele, iEvent);
         }
 
-        if (isMC_) {
+        if (isMC_ && saveGenInfoEle_) {
             matchedToGenEle_ = matchToTruth( ele, genParticles, matchedGenIdx_);
         }
 
@@ -422,6 +426,7 @@ ElectronMVANtuplizer::fillDescriptions(edm::ConfigurationDescriptions& descripti
     desc.add<bool>("isMC");
     desc.add<double>("deltaR", 0.1);
     desc.add<double>("ptThreshold", 5.0);
+    desc.add<bool>("saveGenInfoEle");
     desc.addUntracked<std::vector<std::string>>("eleMVAs");
     desc.addUntracked<std::vector<std::string>>("eleMVALabels");
     desc.addUntracked<std::vector<std::string>>("eleMVAValMaps");
