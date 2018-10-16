@@ -1,0 +1,221 @@
+from PhysicsTools.SelectorUtils.centralIDRegistry import central_id_registry
+
+import FWCore.ParameterSet.Config as cms
+
+# Common functions and classes for ID definition are imported here:
+from RecoEgamma.ElectronIdentification.Identification.cutBasedElectronID_tools \
+    import ( EleWorkingPoint_V5_HEMSafe,
+             IsolationCutInputs_V2,
+             configureVIDCutBasedEleID_V5_HEMSafe )
+
+#
+# The ID cuts below are optimized IDs on Fall17 simulation with 94X-based production
+# The cut values are taken from the twiki:
+#       https://twiki.cern.ch/twiki/bin/view/CMS/CutBasedElectronIdentificationRun2
+#       (where they may not stay, if a newer version of cuts becomes available for these
+#        conditions)
+# See also the presentation explaining these working points (this will not change):
+#  https://indico.cern.ch/event/697079/ 
+#
+#
+
+# Veto working point Barrel and Endcap
+#V2 of IDs good for Moriond 18
+idName = "cutBasedElectronID-Fall17-94X-V2-HEMSafe-veto"
+WP_Veto_EB = EleWorkingPoint_V5_HEMSafe(
+    idName                         = idName  , # idName
+    full5x5_sigmaIEtaIEtaCut       = 0.0126  , # full5x5_sigmaIEtaIEtaCut
+    dEtaInSeedCut                  = 0.00463 , # dEtaInSeedCut
+    dPhiInCut                      = 0.148   , # dPhiInCut
+    hOverECut_C0                   = 0.05    , # hOverECut
+    hOverECut_CE                   = 1.16    ,
+    hOverECut_Cr                   = 0.0324  ,
+    relCombIsolationWithEACut_C0   = 0.198   , # relCombIsolationWithEACut
+    relCombIsolationWithEACut_Cpt  = 0.506   ,
+    absEInverseMinusPInverseCut    = 0.209   , # absEInverseMinusPInverseCut
+    # conversion veto cut needs no parameters, so not mentioned
+    missingHitsCut                 = 2,          # missingHitsCut
+    trkIsoSlopeTerm=0.00,     
+    trkIsoSlopeStart=10000.00,   
+    trkIsoConstTerm=5.00     
+
+    )
+
+WP_Veto_EE = EleWorkingPoint_V5_HEMSafe(
+    idName                         = idName  , # idName
+    full5x5_sigmaIEtaIEtaCut       = 0.0457  , # full5x5_sigmaIEtaIEtaCut
+    dEtaInSeedCut                  = 0.00814 , # dEtaInSeedCut
+    dPhiInCut                      = 0.19    , # dPhiInCut
+    hOverECut_C0                   = 0.05    , # hOverECut
+    hOverECut_CE                   = 2.54    ,
+    hOverECut_Cr                   = 0.183   ,
+    relCombIsolationWithEACut_C0   = 0.203   , # relCombIsolationWithEACut
+    relCombIsolationWithEACut_Cpt  = 0.963   ,
+    absEInverseMinusPInverseCut    = 0.132   , # absEInverseMinusPInverseCut
+    # conversion veto cut needs no parameters, so not mentioned
+    missingHitsCut                 = 3,          # missingHitsCut
+    trkIsoSlopeTerm=0.00,     
+    trkIsoSlopeStart=10000.00,   
+    trkIsoConstTerm=5.00     
+
+    )
+
+# Loose working point Barrel and Endcap
+idName = "cutBasedElectronID-Fall17-94X-V2-HEMSafe-loose"
+WP_Loose_EB = EleWorkingPoint_V5_HEMSafe(
+    idName                         = idName  , # idName
+    full5x5_sigmaIEtaIEtaCut       = 0.0112  , # full5x5_sigmaIEtaIEtaCut
+    dEtaInSeedCut                  = 0.00377 , # dEtaInSeedCut
+    dPhiInCut                      = 0.0884  , # dPhiInCut
+    hOverECut_C0                   = 0.05    , # hOverECut
+    hOverECut_CE                   = 1.16    ,
+    hOverECut_Cr                   = 0.0324  ,
+    relCombIsolationWithEACut_C0   = 0.112   , # relCombIsolationWithEACut
+    relCombIsolationWithEACut_Cpt  = 0.506   ,
+    absEInverseMinusPInverseCut    = 0.193   , # absEInverseMinusPInverseCut
+    # conversion veto cut needs no parameters, so not mentioned
+    missingHitsCut                 = 1,          # missingHitsCut
+    trkIsoSlopeTerm=0.00,     
+    trkIsoSlopeStart=10000.00,   
+    trkIsoConstTerm=5.00     
+    )
+
+WP_Loose_EE = EleWorkingPoint_V5_HEMSafe(
+    idName                         = idName  , # idName
+    full5x5_sigmaIEtaIEtaCut       = 0.0425  , # full5x5_sigmaIEtaIEtaCut
+    dEtaInSeedCut                  = 0.00674 , # dEtaInSeedCut
+    dPhiInCut                      = 0.169   , # dPhiInCut
+    hOverECut_C0                   = 0.0441  , # hOverECut
+    hOverECut_CE                   = 2.54    ,
+    hOverECut_Cr                   = 0.183   ,
+    relCombIsolationWithEACut_C0   = 0.108   , # relCombIsolationWithEACut
+    relCombIsolationWithEACut_Cpt  = 0.963   ,
+    absEInverseMinusPInverseCut    = 0.111   , # absEInverseMinusPInverseCut
+    # conversion veto cut needs no parameters, so not mentioned
+    missingHitsCut                 = 1,         # missingHitsCut
+    trkIsoSlopeTerm=0.00,     
+    trkIsoSlopeStart=10000.00,   
+    trkIsoConstTerm=5.00     
+
+    )
+
+# Medium working point Barrel and Endcap
+idName = "cutBasedElectronID-Fall17-94X-V2-HEMSafe-medium"
+WP_Medium_EB = EleWorkingPoint_V5_HEMSafe(
+    idName                         = idName  , # idName
+    full5x5_sigmaIEtaIEtaCut       = 0.0106  , # full5x5_sigmaIEtaIEtaCut
+    dEtaInSeedCut                  = 0.0032  , # dEtaInSeedCut
+    dPhiInCut                      = 0.0547  , # dPhiInCut
+    hOverECut_C0                   = 0.046   , # hOverECut
+    hOverECut_CE                   = 1.16    ,
+    hOverECut_Cr                   = 0.0324  ,
+    relCombIsolationWithEACut_C0   = 0.0478  , # relCombIsolationWithEACut
+    relCombIsolationWithEACut_Cpt  = 0.506   ,
+    absEInverseMinusPInverseCut    = 0.184   , # absEInverseMinusPInverseCut
+    # conversion veto cut needs no parameters, so not mentioned
+    missingHitsCut                 = 1,          # missingHitsCut
+    # Three constants for the GsfEleTrkPtIsoCut: 
+    #     cut = constTerm if value < slopeStart
+    #     cut = slopeTerm * (value - slopeStart) + constTerm if value >= slopeStart
+    trkIsoSlopeTerm=0.00,     
+    trkIsoSlopeStart=10000.00,   
+    trkIsoConstTerm=5.00     
+    )
+
+WP_Medium_EE = EleWorkingPoint_V5_HEMSafe(
+    idName                         = idName  , # idName
+    full5x5_sigmaIEtaIEtaCut       = 0.0387  , # full5x5_sigmaIEtaIEtaCut
+    dEtaInSeedCut                  = 0.00632 , # dEtaInSeedCut
+    dPhiInCut                      = 0.0394  , # dPhiInCut
+    hOverECut_C0                   = 0.0275  , # hOverECut
+    hOverECut_CE                   = 2.52    ,
+    hOverECut_Cr                   = 0.183   ,
+    relCombIsolationWithEACut_C0   = 0.0658  , # relCombIsolationWithEACut
+    relCombIsolationWithEACut_Cpt  = 0.963   ,
+    absEInverseMinusPInverseCut    = 0.0721  , # absEInverseMinusPInverseCut
+    # conversion veto cut needs no parameters, so not mentioned
+    missingHitsCut                 = 1,          # missingHitsCut
+    # Three constants for the GsfEleTrkPtIsoCut: 
+    #     cut = constTerm if value < slopeStart
+    #     cut = slopeTerm * (value - slopeStart) + constTerm if value >= slopeStart
+    trkIsoSlopeTerm=0.00,     
+    trkIsoSlopeStart=10000.00,   
+    trkIsoConstTerm=5.00     
+
+    )
+
+
+
+# Tight working point Barrel and Endcap
+idName = "cutBasedElectronID-Fall17-94X-V2-HEMSafe-tight"
+WP_Tight_EB = EleWorkingPoint_V5_HEMSafe(
+    idName                         = idName  , # idName
+    full5x5_sigmaIEtaIEtaCut       = 0.0104  , # full5x5_sigmaIEtaIEtaCut
+    dEtaInSeedCut                  = 0.00255 , # dEtaInSeedCut
+    dPhiInCut                      = 0.022   , # dPhiInCut
+    hOverECut_C0                   = 0.026   , # hOverECut
+    hOverECut_CE                   = 1.15    ,
+    hOverECut_Cr                   = 0.0324  ,
+    relCombIsolationWithEACut_C0   = 0.0287  , # relCombIsolationWithEACut
+    relCombIsolationWithEACut_Cpt  = 0.506   ,
+    absEInverseMinusPInverseCut    = 0.159   , # absEInverseMinusPInverseCut
+    # conversion veto cut needs no parameters, so not mentioned
+    missingHitsCut                 = 1,          # missingHitsCut
+    trkIsoSlopeTerm=0.00,     
+    trkIsoSlopeStart=10000.00,   
+    trkIsoConstTerm=5.00     
+
+    )
+
+WP_Tight_EE = EleWorkingPoint_V5_HEMSafe(
+    idName                         = idName  , # idName
+    full5x5_sigmaIEtaIEtaCut       = 0.0353  , # full5x5_sigmaIEtaIEtaCut
+    dEtaInSeedCut                  = 0.00501 , # dEtaInSeedCut
+    dPhiInCut                      = 0.0236  , # dPhiInCut
+    hOverECut_C0                   = 0.0188  , # hOverECut
+    hOverECut_CE                   = 2.06    ,
+    hOverECut_Cr                   = 0.183   ,
+    relCombIsolationWithEACut_C0   = 0.0445  , # relCombIsolationWithEACut
+    relCombIsolationWithEACut_Cpt  = 0.963   ,
+    absEInverseMinusPInverseCut    = 0.0197  , # absEInverseMinusPInverseCut
+    # conversion veto cut needs no parameters, so not mentioned
+    missingHitsCut                 = 1,         # missingHitsCut
+    trkIsoSlopeTerm=0.00,     
+    trkIsoSlopeStart=10000.00,   
+    trkIsoConstTerm=5.00     
+
+    )
+
+# Second, define what effective areas to use for pile-up correction
+isoInputs = IsolationCutInputs_V2(
+    # phoIsolationEffAreas
+    "RecoEgamma/ElectronIdentification/data/Fall17/effAreaElectrons_cone03_pfNeuHadronsAndPhotons_94X.txt"
+)
+
+
+#
+# Set up VID configuration for all cuts and working points
+#
+
+cutBasedElectronID_Fall17_94X_V2_HEMSafe_veto   = configureVIDCutBasedEleID_V5_HEMSafe(WP_Veto_EB,   WP_Veto_EE, isoInputs)
+cutBasedElectronID_Fall17_94X_V2_HEMSafe_loose  = configureVIDCutBasedEleID_V5_HEMSafe(WP_Loose_EB,  WP_Loose_EE, isoInputs)
+cutBasedElectronID_Fall17_94X_V2_HEMSafe_medium = configureVIDCutBasedEleID_V5_HEMSafe(WP_Medium_EB, WP_Medium_EE, isoInputs)
+cutBasedElectronID_Fall17_94X_V2_HEMSafe_tight  = configureVIDCutBasedEleID_V5_HEMSafe(WP_Tight_EB,  WP_Tight_EE, isoInputs)
+
+# The MD5 sum numbers below reflect the exact set of cut variables
+# and values above. If anything changes, one has to 
+# 1) comment out the lines below about the registry and the isPOGApproved lines,
+# 2) run "calculateIdMD5 <this file name> <one of the VID config names just above>
+# 3) update the MD5 sum strings below and uncomment the lines again.
+#
+
+central_id_registry.register(cutBasedElectronID_Fall17_94X_V2_HEMSafe_veto.idName,   'ef989892b1b4eb42b5c12f8b17e5187b')
+central_id_registry.register(cutBasedElectronID_Fall17_94X_V2_HEMSafe_loose.idName,  '64ae6661f454feb17593147525c7b3f1')
+central_id_registry.register(cutBasedElectronID_Fall17_94X_V2_HEMSafe_medium.idName, '0d76bfed4e706570b003ce5180392ed1')
+central_id_registry.register(cutBasedElectronID_Fall17_94X_V2_HEMSafe_tight.idName,  'f15bb7ee9ac3d8b8084dd7c1f123e451')
+
+### for now until we have a database...
+cutBasedElectronID_Fall17_94X_V2_HEMSafe_veto.isPOGApproved   = cms.untracked.bool(True)
+cutBasedElectronID_Fall17_94X_V2_HEMSafe_loose.isPOGApproved  = cms.untracked.bool(True)
+cutBasedElectronID_Fall17_94X_V2_HEMSafe_medium.isPOGApproved = cms.untracked.bool(True)
+cutBasedElectronID_Fall17_94X_V2_HEMSafe_tight.isPOGApproved  = cms.untracked.bool(True)
