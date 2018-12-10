@@ -181,7 +181,6 @@ ElectronMVANtuplizer::ElectronMVANtuplizer(const edm::ParameterSet& iConfig)
     for (size_t k = 0; k < nEleMaps_; ++k) {
 
         eleMapTokens_.push_back(consumes<edm::ValueMap<bool> >(edm::InputTag(eleMapTags_[k])));
-
         // Initialize vectors for holding ID decisions
         mvaPasses_.push_back(0);
     }

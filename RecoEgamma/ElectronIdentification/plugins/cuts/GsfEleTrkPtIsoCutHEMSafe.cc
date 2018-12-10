@@ -46,21 +46,13 @@ GsfEleTrkPtIsoCutHEMSafe::GsfEleTrkPtIsoCutHEMSafe(const edm::ParameterSet& para
 CutApplicatorBase::result_type 
 GsfEleTrkPtIsoCutHEMSafe::
 operator()(const reco::GsfElectronPtr& cand) const{  
-  //  std::cout<<cand->hcalOverEcalValid();
-//  if(cand->hcalDepth1OverEcalBc()==0 && cand->hcalDepth2OverEcalBc()==0 ){std::cout<<"5x5:"<< cand->full5x5_hcalDepth1OverEcal()<<" phi is:"<<cand->phi()<<"hcalOverEcalValid() "<<cand->hcalOverEcalValid()<<" full5x5_hcalOverEcalValid()"<< cand->full5x5_hcalOverEcalValid()<<std::endl;;
-//    return true;
-//  }else {
-//    return false;
-//  }
 
-  if(cand->hcalOverEcalValid()==0)std::cout<<"-------------------------------------dajeeee"<<std::endl;
-//  if (!cand->hcalOverEcalValid()){  
-  if(cand->phi()<-0.5 && cand->phi()>-2. && cand->hcalDepth1OverEcalBc()==0 && cand->hcalDepth2OverEcalBc()==0 && cand->eta()<-1.4){
+  if (!cand->hcalOverEcalValid()){  
+//this is a geometrical selection for selecting the hem-problem part
+//  if(cand->phi()<-0.5 && cand->phi()>-2. && cand->hcalDepth1OverEcalBc()==0 && cand->hcalDepth2OverEcalBc()==0 && cand->eta()<-1.4){
     const float isolTrkPt = cand->dr03TkSumPt();
     const float et = cand->et();
     const float cutValue = et > slopeStart_(cand)  ? slopeTerm_(cand)*(et-slopeStart_(cand)) + constTerm_(cand) : constTerm_(cand);
-    //    bool pass= isolTrkPt < cutValue;
-    if (cand->hcalOverEcalValid()==false) std::cout<<"daje"<<std::endl;
     return isolTrkPt < cutValue;
   }
     return true;

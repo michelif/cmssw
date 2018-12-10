@@ -24,14 +24,16 @@ process.source = cms.Source("PoolSource",
 #hcal on
 #        '/store/relval/CMSSW_10_1_7/JetHT/MINIAOD/101X_dataRun2_Prompt_v11_RelVal_jetHT2018B-v1/10000/186E3EB8-1D80-E811-81CB-0CC47A4C8F0A.root'
 #hcal off
-        '/store/relval/CMSSW_10_1_7/JetHT/MINIAOD/101X_dataRun2_Prompt_HEmiss_v1_RelVal_jetHT2018B-v1/10000/F8921004-1980-E811-9FDC-0CC47A4D76D6.root',
-        '/store/relval/CMSSW_10_1_7/JetHT/MINIAOD/101X_dataRun2_Prompt_HEmiss_v1_RelVal_jetHT2018B-v1/10000/F025E36F-1D80-E811-967D-0CC47A4D75EC.root',
-        '/store/relval/CMSSW_10_1_7/JetHT/MINIAOD/101X_dataRun2_Prompt_HEmiss_v1_RelVal_jetHT2018B-v1/10000/A61DE4BE-0B80-E811-B433-0CC47A7C3404.root',
-        '/store/relval/CMSSW_10_1_7/JetHT/MINIAOD/101X_dataRun2_Prompt_HEmiss_v1_RelVal_jetHT2018B-v1/10000/84880955-1680-E811-9CE8-0025905A60A8.root',
-        '/store/relval/CMSSW_10_1_7/JetHT/MINIAOD/101X_dataRun2_Prompt_HEmiss_v1_RelVal_jetHT2018B-v1/10000/3C8CA11A-0280-E811-810C-0025905A60F4.root',
-        '/store/relval/CMSSW_10_1_7/JetHT/MINIAOD/101X_dataRun2_Prompt_HEmiss_v1_RelVal_jetHT2018B-v1/10000/32AC5D94-1080-E811-A11D-0CC47A4C8F12.root',
-        '/store/relval/CMSSW_10_1_7/JetHT/MINIAOD/101X_dataRun2_Prompt_HEmiss_v1_RelVal_jetHT2018B-v1/10000/0453F57F-1480-E811-9B22-0CC47A4C8F12.root',
-        '/store/relval/CMSSW_10_1_7/JetHT/MINIAOD/101X_dataRun2_Prompt_HEmiss_v1_RelVal_jetHT2018B-v1/10000/00DBB9B1-1280-E811-A08D-0025905B85BC.root'
+#        '/store/relval/CMSSW_10_1_7/JetHT/MINIAOD/101X_dataRun2_Prompt_HEmiss_v1_RelVal_jetHT2018B-v1/10000/F8921004-1980-E811-9FDC-0CC47A4D76D6.root',
+#        '/store/relval/CMSSW_10_1_7/JetHT/MINIAOD/101X_dataRun2_Prompt_HEmiss_v1_RelVal_jetHT2018B-v1/10000/F025E36F-1D80-E811-967D-0CC47A4D75EC.root',
+#        '/store/relval/CMSSW_10_1_7/JetHT/MINIAOD/101X_dataRun2_Prompt_HEmiss_v1_RelVal_jetHT2018B-v1/10000/A61DE4BE-0B80-E811-B433-0CC47A7C3404.root',
+#        '/store/relval/CMSSW_10_1_7/JetHT/MINIAOD/101X_dataRun2_Prompt_HEmiss_v1_RelVal_jetHT2018B-v1/10000/84880955-1680-E811-9CE8-0025905A60A8.root',
+#        '/store/relval/CMSSW_10_1_7/JetHT/MINIAOD/101X_dataRun2_Prompt_HEmiss_v1_RelVal_jetHT2018B-v1/10000/3C8CA11A-0280-E811-810C-0025905A60F4.root',
+#        '/store/relval/CMSSW_10_1_7/JetHT/MINIAOD/101X_dataRun2_Prompt_HEmiss_v1_RelVal_jetHT2018B-v1/10000/32AC5D94-1080-E811-A11D-0CC47A4C8F12.root',
+#        '/store/relval/CMSSW_10_1_7/JetHT/MINIAOD/101X_dataRun2_Prompt_HEmiss_v1_RelVal_jetHT2018B-v1/10000/0453F57F-1480-E811-9B22-0CC47A4C8F12.root',
+#        '/store/relval/CMSSW_10_1_7/JetHT/MINIAOD/101X_dataRun2_Prompt_HEmiss_v1_RelVal_jetHT2018B-v1/10000/00DBB9B1-1280-E811-A08D-0025905B85BC.root'
+#        '/store/data/Run2018A/JetHT/MINIAOD/17Sep2018-v1/00000/00A64001-F644-8740-AC48-14CD4E623E40.root'
+        '/store/data/Run2018C/JetHT/MINIAOD/17Sep2018-v1/60000/FCE96966-A7DE-2B40-8A89-79CE611ADAD3.root'
     )
 )
 
@@ -74,11 +76,11 @@ process.ntuplizer = cms.EDAnalyzer('ElectronMVANtuplizer',
         genParticlesMiniAOD  = cms.InputTag('prunedGenParticles'),
         #
         eleMVAs             = cms.untracked.vstring(
-                                          "egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V2-HEMSafe-medium",
-                                          "egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V2-medium",
                                           "egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V2-HEMSafe-loose",
-                                          "egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V2-loose",
+                                          "egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V2-HEMSafe-medium",
                                           "egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V2-HEMSafe-tight",
+                                          "egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V2-loose",
+                                          "egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V2-medium",
                                           "egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V2-tight",
                                           "egmGsfElectronIDs:mvaEleID-Fall17-noIso-V2-wp80",
                                           "egmGsfElectronIDs:mvaEleID-Fall17-noIso-V2-wpLoose",
@@ -95,11 +97,11 @@ process.ntuplizer = cms.EDAnalyzer('ElectronMVANtuplizer',
                                           "egmGsfElectronIDs:mvaEleID-Fall17-iso-V1-wpLoose",
                                           ),
         eleMVALabels        = cms.untracked.vstring(
-                                        "Fall17CutBasedV2_medium_HEMSafe",
-                                        "Fall17CutBasedV2_medium",
                                         "Fall17CutBasedV2_loose_HEMSafe",
-                                        "Fall17CutBasedV2_loose",
+                                        "Fall17CutBasedV2_medium_HEMSafe",
                                         "Fall17CutBasedV2_tight_HEMSafe",
+                                        "Fall17CutBasedV2_loose",
+                                        "Fall17CutBasedV2_medium",
                                         "Fall17CutBasedV2_tight",
                                         "Fall17noIsoV2wp80",
                                         "Fall17noIsoV2wpLoose",
