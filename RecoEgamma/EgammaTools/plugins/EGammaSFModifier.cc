@@ -63,11 +63,10 @@ void EGammaSFModifier::modifyObject(pat::Electron& ele) const {
   double eleUserFloatValue = -99;
   double eleUserFloatError = -99;
 
-  if (ele_pt_eta_str[0] == "under/overflow" or ele_pt_eta_str[1] == "under/overflow") { eleUserFloatValue = 1.0; eleUserFloatError = 0.00001;}
-  else {
-    eleUserFloatValue = getSF().value(year, ele_sf_name, ele_pt_eta_str[0], ele_pt_eta_str[1]);
-    eleUserFloatError = getSF().error(year, ele_sf_name, ele_pt_eta_str[0], ele_pt_eta_str[1]);
-  }
+
+  // IF UNDER/OVERFLOW TAKE THE CLOSEST BIN
+  eleUserFloatValue = getSF().value(year, ele_sf_name, ele_pt_eta_str[0], ele_pt_eta_str[1]);
+  eleUserFloatError = getSF().error(year, ele_sf_name, ele_pt_eta_str[0], ele_pt_eta_str[1]);
 
   ele.addUserFloat(ele_sf_name + "_value", eleUserFloatValue);
   ele.addUserFloat(ele_sf_name + "_error", eleUserFloatError);
@@ -80,11 +79,10 @@ void EGammaSFModifier::modifyObject(pat::Photon& pho) const {
   double phoUserFloatValue = -99;
   double phoUserFloatError = -99;
 
-  if (pho_pt_eta_str[0] == "under/overflow" or pho_pt_eta_str[1] == "under/overflow") { phoUserFloatValue = 1.0; phoUserFloatError = 0.00001;}
-  else {
-    phoUserFloatValue = getSF().value(year, pho_sf_name, pho_pt_eta_str[0], pho_pt_eta_str[1]);
-    phoUserFloatError = getSF().error(year, pho_sf_name, pho_pt_eta_str[0], pho_pt_eta_str[1]);
-  }
+
+  // IF UNDER/OVERFLOW TAKE THE CLOSEST BIN
+  phoUserFloatValue = getSF().value(year, pho_sf_name, pho_pt_eta_str[0], pho_pt_eta_str[1]);
+  phoUserFloatError = getSF().error(year, pho_sf_name, pho_pt_eta_str[0], pho_pt_eta_str[1]);
 
   pho.addUserFloat(pho_sf_name + "_value", phoUserFloatValue);
   pho.addUserFloat(pho_sf_name + "_error", phoUserFloatError);
@@ -105,18 +103,28 @@ std::vector<std::string> chooseCategory( double pt, std::vector<double> pt_bndrs
 
   for( int n = 0 ; n < ( int ) pt_bndrs.size() ; n++ ) {
 
-    // TREATING UNDER/OVERFLOW 
-    if ( ( double ) pt > pt_bndrs[pt_bndrs.size()-1] or ( double ) pt < pt_bndrs[0] ) { 
-      pt_str = "under/overflow"; pt_lower_edge = "under/overflow"; pt_upper_edge = "under/overflow"; 
-    }
-    
     // REGULAR CASE
-    else if ( ( double ) pt > pt_bndrs[pt_bndrs.size() - n - 1] ) {
+    if ( ( double ) pt > pt_bndrs[pt_bndrs.size() - n - 1] ) {
       pt_lower_edge = std::to_string( pt_bndrs[pt_bndrs.size() - n - 1] );
       pt_upper_edge = std::to_string( pt_bndrs[pt_bndrs.size() - n] );
       pt_str = "pt:[" + stripZeros(pt_lower_edge) + "," + stripZeros(pt_upper_edge) + "]";
       break;
     }
+
+    // TREATING UNDERRFLOW 
+    else if ( ( double )  pt < pt_bndrs[0] ) { 
+      pt_lower_edge = std::to_string( pt_bndrs[0] );
+      pt_upper_edge = std::to_string( pt_bndrs[1] );
+      pt_str = "pt:[" + stripZeros(pt_lower_edge) + "," + stripZeros(pt_upper_edge) + "]";
+      break;
+   }
+
+    // TREATING OVERRFLOW 
+    else if ( ( double ) pt > pt_bndrs[pt_bndrs.size() - 1] ) { 
+      pt_lower_edge = std::to_string( pt_bndrs[pt_bndrs.size() - 2] );
+      pt_upper_edge = std::to_string( pt_bndrs[pt_bndrs.size() - 1] );
+      pt_str = "pt:[" + stripZeros(pt_lower_edge) + "," + stripZeros(pt_upper_edge) + "]";
+   }
   }
 
   // PT BIN ASSERTION
@@ -130,17 +138,27 @@ std::vector<std::string> chooseCategory( double pt, std::vector<double> pt_bndrs
 
   for( int n = 0 ; n < ( int ) eta_bndrs.size() ; n++ ) {
 
-    // TREATING UNDER/OVERFLOW 
-    if ( ( double ) eta > eta_bndrs[eta_bndrs.size()-1] or ( double ) eta < eta_bndrs[0] ) { 
-      eta_str = "under/overflow"; eta_lower_edge = "under/overflow"; eta_upper_edge = "under/overflow"; 
-    }
-
     // REGULAR CASE
     if ( ( double ) eta > eta_bndrs[eta_bndrs.size() - n - 1] ) {
       eta_lower_edge = std::to_string( eta_bndrs[eta_bndrs.size() - n - 1] );
       eta_upper_edge = std::to_string( eta_bndrs[eta_bndrs.size() - n] );
       eta_str = "eta:[" + stripZeros(eta_lower_edge) + "," + stripZeros(eta_upper_edge) + "]";
       break;
+    }
+
+    // TREATING UNDERFLOW 
+    else if (  ( double ) eta < eta_bndrs[0] ) { 
+      eta_lower_edge = std::to_string( eta_bndrs[0] );
+      eta_upper_edge = std::to_string( eta_bndrs[1] );
+      eta_str = "eta:[" + stripZeros(eta_lower_edge) + "," + stripZeros(eta_upper_edge) + "]";
+      break;
+    }
+
+    // TREATING OVERFLOW 
+    else if ( ( double ) eta > eta_bndrs[eta_bndrs.size() - 1] ) { 
+      eta_lower_edge = std::to_string( eta_bndrs[eta_bndrs.size() - 2] );
+      eta_upper_edge = std::to_string( eta_bndrs[eta_bndrs.size() - 1] );
+      eta_str = "eta:[" + stripZeros(eta_lower_edge) + "," + stripZeros(eta_upper_edge) + "]";
     }
   }
 
